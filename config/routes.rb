@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
-  get '/dashboard' => 'home#dashboard'
-  get '/dashboard/:user_rid' => 'home#dashboard'
-  get '/subject/:subject_id' => 'home#subject'
-  get '/setting/:user_id' => 'home#setting'
   post '/makeuseraccount' => 'home#makeuseraccount'
+  get '/setting/:user_id' => 'home#setting'
+  get '/dashboard/:user_rid' => 'home#dashboard'
+  
   get '/addRole/:user_rid' =>'home#addRole'
   get '/addSubject/:user_rid' => 'home#addSubject'
+  get '/deleteRole/:user_rid/:identity_id' => 'home#deleteRole'
+  get '/deleteSubject/:user_rid/:subject_id' => 'home#deleteSubject'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

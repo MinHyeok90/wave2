@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/addSubject/:user_rid' => 'home#addSubject'
   get '/deleteRole/:user_rid/:identity_id' => 'home#deleteRole'
   get '/deleteSubject/:user_rid/:subject_id' => 'home#deleteSubject'
-  
+  get '/planandfeedback/:user_rid/:subject_id' => 'home#planandfeedback'
+  post '/planandfeedback/w/:user_rid/:subject_id' => 'home#write'
+  get '/planandfeedback/d/:user_rid/:subject_id/:post_id' => 'home#deletePost'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

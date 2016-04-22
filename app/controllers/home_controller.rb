@@ -32,12 +32,26 @@ class HomeController < ApplicationController
   end
   
   def deleteSubject
-    p "22"
     @one_post = Subject.find(params[:subject_id])
     @one_post.destroy
     redirect_to controller: 'home', action: 'dashboard', user_rid: params[:user_rid]
   end
   
-  def subject
+  def planandfeedback
+    @username = params[:user_rid]
+    @subjectid = params[:subject_id]
+    
+    @user_post = Post.where("subject_id = ?" , params[:subject_id]).order("id desc")
+  end
+  
+  def write
+    Post.create(subject_id: params[:subject_id], plan: params[:plan], feedback: params[:feedback])
+    redirect_to controller: 'home', action: 'planandfeedback', user_rid: params[:user_rid]
+  end
+  
+  def deletePost
+    @one_post = Post.find(params[:post_id])
+    @one_post.destroy
+    redirect_to controller: 'home', action: 'planandfeedback', user_rid: params[:user_rid]
   end
 end

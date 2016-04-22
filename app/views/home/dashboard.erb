@@ -20,9 +20,10 @@
         <% @subjects = Subject.where("identity_id = ?" , p.id).order("id desc") %>
         <% @subjects.each do |s| %>
             <div class="col-xs-6 col-sm-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">
+            <a href="/planandfeedback/<%= @user.realID %>/<%= s.id %>">
             subject.NO : <%= s.id %><br>
             주제:<%= s.title %><hr>
-            목표:<%= s.goal %><br>
+            목표:<%= s.goal %><br></a>
             <a href="/update_view/<%= s.id %>">[수정]</a><a href="/deleteSubject/<%= @user.realID %>/<%= s.id %>">[삭제]</a>
             </div>
         <% end %>
@@ -46,7 +47,7 @@
           <div class="col-xs-1"></div>
           <div class="col-xs-3">
                 <label for="exampleInputEmail1">새 역할</label>
-                <input type="text" name="newrole" class="form-control" id="exampleInputPassword1" placeholder="New Role">
+                <input type="text" name="newrole" class="form-control" id="exampleInputPassword1" placeholder="당신의 역할">
           </div>
           <div class="col-xs-6">
                 <label for="exampleInputEmail1">목적</label>

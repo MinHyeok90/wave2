@@ -1,0 +1,35 @@
+<div class="container" style="margin-top:50px">
+    <div class="row">
+        <form action="/planandfeedback/w/<%=@username%>/<%=@subjectid%>" method="POST">
+          <div class="col-xs-6 col-md-5">
+                <label for="exampleInputEmail1">새로운 계획</label>
+                <textarea name="plan" class="form-control" rows="10" placeholder="1.피드백을 참고한 다음 수행계획  2.시기, 기한 혹은 진행중인 사항을 무작정 기록하셔도 좋습니다."></textarea>
+          </div>
+          <div class="col-xs-6 col-md-5">
+                <label for="exampleInputEmail1">전 계획 실행결과 피드백</label>
+                <textarea name="feedback" class="form-control" rows="10" placeholder="전 계획의 1.좋았던 점, 2.문제점 3.개선 가능한 점을 생각해 작성해주세요"></textarea>
+          </div>
+          <div class="col-xs-12 col-md-2">
+              <button type="submit" class="btn btn-primary" style="margin-top:25px">작성완료</button>
+          </div>
+        </form>
+    </div><!--row-->
+    <hr>
+    <!--이하 list row-->
+    <h2>Plan & FeedBack History</h2>
+    <% @user_post.each do |p| %>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">문서번호 : <%= p.id %></div>
+        <div class="col-xs-6 col-md-3">작성시간 : <%= p.created_at %></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb">Plan<br><%= p.plan %></div>
+        <div class="col-xs-12 col-sm-6 col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb">FeedBack<br><%= p.feedback %></div>
+        <div class="col-xs-12 col-sm-6 col-md-2">
+        <a href="/update_view/<%= p.id %>">[수정]</a>
+        <a href="/planandfeedback/d/<%=@username%>/<%=@subjectid%>/<%= p.id %>">[삭제]</a>
+        </div>
+    </div>
+    <hr>
+    <% end %>
+</div>

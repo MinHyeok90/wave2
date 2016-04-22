@@ -1,0 +1,60 @@
+<div class="container" style="margin-top:50px">
+<!--Dashborad 출력부분-->
+    <div class="row">
+        <div class="dashboard">
+            dashboard 출력부분입니다.
+        </div>
+    </div>
+<!--역할목적 출력부분-->
+user.id:<%= @user.id %>님의 역할들
+    <% @identities.each do |p| %>
+    <hr>
+    <div class="row">
+        <div class="col-xs-2">identitiy.NO: <%= p.id %></div>
+        <div class="col-xs-2">역할: <%= p.role %></div><div class="col-xs-8">목적:<%= p.objective %>
+        <a href="/update_view/<%= p.id %>">[수정]</a>
+        <a href="/destroy/<%= p.id %>">[삭제]</a></div>
+    </div>
+    <!--주제list 출력부-->
+    <div class="row">
+        <% @subjects = Subject.where("identity_id = ?" , p.id).order("id desc") %>
+        <% @subjects.each do |s| %>
+            <div class="col-xs-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">
+            subject.NO : <%= s.id %><br>주제:<%= s.title %><hr>목표:<%= s.goal %><br>
+            <a href="/update_view/<%= p.id %>">[수정]</a><a href="/destroy/<%= p.id %>">[삭제]</a>
+            </div>
+        <% end %>
+    <!--새 주제 입력부-->
+        <form action="/addSubject/<%= @user.realID %>" method="GET">
+          <div class="col-xs-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">새 주제
+            <input type="text" name="title" class="form-control" id="exampleInputPassword1" placeholder="New Subject">새 목표
+            <input type="text" name="goal" class="form-control" id="exampleInputPassword1" placeholder="이 주제는 역할목적의 어떤 한 목표를 이루어 주나요?">
+            <input type="hidden" name="identity_id" value="<%= p.id %>" style="width:1px;height:1px;">
+            <input type="hidden" name="user_nid" value="<%= @user.id %>">
+            <button type="submit" class="btn btn-primary">새 주제 만들기</button>
+          </div>
+        </form>
+    </div><!--row-->
+    
+    <% end %>
+<hr><hr>
+<!--새 역할 목적 입력부-->
+    <div class="row">
+        <form action="/addRole/<%= @user.realID %>" method="GET">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-3">
+                <label for="exampleInputEmail1">새 역할</label>
+                <input type="text" name="newrole" class="form-control" id="exampleInputPassword1" placeholder="New Role">
+          </div>
+          <div class="col-xs-6">
+                <label for="exampleInputEmail1">목적</label>
+                <input type="text" name="newobjective" class="form-control" id="exampleInputPassword1" placeholder="그 역할을 수행하는 목적은 무엇인가요?">
+          </div>
+          <div class="col-xs-2">
+              <input type="hidden" name="user_nid" value="<%= @user.id %>">
+              <button type="submit" class="btn btn-primary" style="margin-top: 25px;">새 역할 만들기</button>
+          </div>
+        </form>
+    </div><!--row-->
+    <div class="row" style="padding:50px"></div>
+</div><!--container-->

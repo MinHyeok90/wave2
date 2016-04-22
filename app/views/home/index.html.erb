@@ -1,0 +1,46 @@
+<!--메뉴부분-->
+
+<div class="container">
+    
+    <div class="row"> <!--로그인-->
+        <form action="/dashboard" method="GET">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-4">
+                <label for="exampleInputEmail1">ID</label>
+                <input type="text" name="user_rid" class="form-control" id="exampleInputPassword1" placeholder="ID">
+          </div>
+          <div class="col-xs-1"></div>
+          <div class="col-xs-4">
+                <label for="exampleInputEmail1">비밀번호</label>
+                <input type="password" name="pw" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <div class="col-xs-2">
+              <button type="submit" class="btn btn-primary">로그인하기</button>
+          </div>
+        </form>
+    </div>
+    <hr>
+    
+    <div class="row"><!--계정생성-->
+        <form action="/makeuseraccount" method="POST">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-4">
+                <label for="exampleInputEmail1">ID</label>
+                <input type="text" name="newid" class="form-control" id="exampleInputPassword1" placeholder="New ID">
+          </div>
+          <div class="col-xs-1"></div>
+          <div class="col-xs-4">
+                <label for="exampleInputEmail1">비밀번호</label>
+                <input type="password" name="newpw" class="form-control" id="exampleInputPassword1" placeholder="New Password">
+          </div>
+          <div class="col-xs-2">
+              <button type="submit" class="btn btn-primary">계정생성&로그인하기</button>
+          </div>
+        </form>
+    </div>
+    <hr>
+    
+</div> <!--container-->
+
+<a href="/subject/1">특정 서브젝트로 이동</a>
+<a href="/setting/1">설정메뉴로 이동</a>

@@ -19,6 +19,7 @@
     <div class="row">
         <% @subjects = Subject.where("identity_id = ?" , r.id).order("id desc") %>
         <% @subjects.each do |s| %>
+            <% if @one_subject.id != s.id %>
             <div class="col-xs-6 col-sm-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">
             <a href="/planandfeedback/<%= @user.realID %>/<%= s.id %>">
             subject.NO : <%= s.id %><br>
@@ -27,17 +28,16 @@
             <a href="/updateSubject_view/<%= @user.realID %>/<%= r.id %>/<%= s.id %>">[수정]</a><a 
             href="/deleteSubject/<%= @user.realID %>/<%= s.id %>">[삭제]</a>
             </div>
+            <% else %>
+            <form action="/updateSubject_do/<%= @user.realID %>/<%=r.id%>/<%=@one_subject.id%>" method="POST">
+              <div class="col-xs-6 col-sm-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">
+                  주제수정<input type="text" value="<%=@one_subject.title%>" name="title" class="form-control" id="exampleInputPassword1" placeholder="무엇을 생각해야 하나요?">
+                  목표수정<input type="text" value="<%=@one_subject.goal%>" name="goal" class="form-control" id="exampleInputPassword1" placeholder="그것을 얼마나 해야하죠?">
+                <button type="submit" class="btn btn-primary">주제,목표 수정하기</button>
+              </div>
+            </form>
+            <% end %>
         <% end %>
-    <!--새 주제 입력부-->
-        <form action="/addSubject/<%= @user.realID %>" method="GET">
-          <div class="col-xs-6 col-sm-4 col-md-3" style="white-space:pre-wrap; outline:1px solid #bbb">
-              새 주제<input type="text" name="title" class="form-control" id="exampleInputPassword1" placeholder="무엇을 생각해야 하나요?">
-              새 목표<input type="text" name="goal" class="form-control" id="exampleInputPassword1" placeholder="그것을 얼마나 해야하죠?">
-            <input type="hidden" name="identity_id" value="<%= r.id %>" style="width:1px;height:1px;">
-            <input type="hidden" name="user_nid" value="<%= @user.id %>">
-            <button type="submit" class="btn btn-primary">새 주제 만들기</button>
-          </div>
-        </form>
     </div><!--row-->
     
     <% end %>

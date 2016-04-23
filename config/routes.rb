@@ -3,15 +3,25 @@ Rails.application.routes.draw do
   root 'home#index'
   post '/makeuseraccount' => 'home#makeuseraccount'
   get '/setting/:user_id' => 'home#setting'
+  
   get '/dashboard/:user_rid' => 'home#dashboard'
   
   get '/addRole/:user_rid' =>'home#addRole'
-  get '/addSubject/:user_rid' => 'home#addSubject'
   get '/deleteRole/:user_rid/:identity_id' => 'home#deleteRole'
+  get '/updateRole_view/:user_rid/:identity_id' => 'home#updateRole_view'
+  post '/updateRole_do/:user_rid/:identity_id' => 'home#updateRole_do'
+  
+  get '/addSubject/:user_rid' => 'home#addSubject'
   get '/deleteSubject/:user_rid/:subject_id' => 'home#deleteSubject'
+  get '/updateSubject_view/:user_rid/:identity_id/:subject_id' => 'home#updateSubject_view'
+  post '/updateSubject_do/:user_rid/:identity_id/:subject_id' => 'home#updateSubject_do'
+  
   get '/planandfeedback/:user_rid/:subject_id' => 'home#planandfeedback'
   post '/planandfeedback/w/:user_rid/:subject_id' => 'home#write'
   get '/planandfeedback/d/:user_rid/:subject_id/:post_id' => 'home#deletePost'
+  get '/planandfeedback/update_view/:user_rid/:subject_id/:post_id' => 'home#update_view'
+  post '/planandfeedback/update_do/:user_rid/:subject_id/:post_id' => 'home#update_do'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

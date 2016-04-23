@@ -8,12 +8,31 @@
 <!--역할목적 출력부분-->user.id:<%= @user.id %>님의 역할들
     <% @identities.each do |r| %>
     <hr>
+    <% if @one_identity.id != r.id %>
     <div class="row">
         <div class="col-xs-2">identitiy.NO: <%= r.id %></div>
         <div class="col-xs-2">역할: <%= r.role %></div><div class="col-xs-8">목적:<%= r.objective %><a
         href="/updateRole_view/<%= @user.realID %>/<%= r.id %>">[수정]</a>
         <a href="/deleteRole/<%= @user.realID %>/<%= r.id %>">[삭제]</a></div>
     </div>
+    <% else %>
+    <div class="row">
+        <form action="/updateRole_do/<%= @user.realID %>/<%= r.id %>" method="POST">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-3">
+                <label for="exampleInputEmail1" style="background-color: orange;">역할수정</label>
+                <input type="text" value="<%= @one_identity.role %>" name="role" class="form-control" id="exampleInputPassword1" placeholder="당신의 역할">
+          </div>
+          <div class="col-xs-6">
+                <label for="exampleInputEmail1" style="background-color: orange;">목적수정</label>
+                <input type="text" value="<%= @one_identity.objective %>" name="objective" class="form-control" id="exampleInputPassword1" placeholder="그 역할을 수행하는 목적은 무엇인가요?">
+          </div>
+          <div class="col-xs-2">
+              <button type="submit" class="btn btn-primary" style="margin-top: 25px;">역할 수정</button>
+          </div>
+        </form>
+    </div><!--row-->
+    <% end %>
     <hr>
     <!--주제list 출력부-->
     <div class="row">
@@ -24,8 +43,7 @@
             subject.NO : <%= s.id %><br>
             주제:<%= s.title %><hr>
             목표:<%= s.goal %><br></a>
-            <a href="/updateSubject_view/<%= @user.realID %>/<%= r.id %>/<%= s.id %>">[수정]</a><a 
-            href="/deleteSubject/<%= @user.realID %>/<%= s.id %>">[삭제]</a>
+            <a href="/updateSubject_view/<%= @user.realID %>/<%= s.id %>">[수정]</a><a href="/deleteSubject/<%= @user.realID %>/<%= s.id %>">[삭제]</a>
             </div>
         <% end %>
     <!--새 주제 입력부-->
@@ -43,22 +61,5 @@
     <% end %>
 <hr><hr>
 <!--새 역할 목적 입력부-->
-    <div class="row">
-        <form action="/addRole/<%= @user.realID %>" method="GET">
-          <div class="col-xs-1"></div>
-          <div class="col-xs-3">
-                <label for="exampleInputEmail1">새 역할</label>
-                <input type="text" name="newrole" class="form-control" id="exampleInputPassword1" placeholder="당신의 역할">
-          </div>
-          <div class="col-xs-6">
-                <label for="exampleInputEmail1">목적</label>
-                <input type="text" name="newobjective" class="form-control" id="exampleInputPassword1" placeholder="그 역할을 수행하는 목적은 무엇인가요?">
-          </div>
-          <div class="col-xs-2">
-              <input type="hidden" name="user_nid" value="<%= @user.id %>">
-              <button type="submit" class="btn btn-primary" style="margin-top: 25px;">새 역할 만들기</button>
-          </div>
-        </form>
-    </div><!--row-->
     <div class="row" style="padding:50px"></div>
 </div><!--container-->

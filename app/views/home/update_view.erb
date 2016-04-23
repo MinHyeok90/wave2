@@ -3,47 +3,37 @@
 
     <!--이하 list row-->
     <h2>History</h2>
-    <% @every_post.each do |p| %>
+    <% @user_post.each do |p| %>
         <% if @one_post.id != p.id %>
-            <div class="row">
-                <div class="col-md-1">문서번호</div>
-                <div class="col-md-4"><%= p.id %></div>
-                <div class="col-md-1">작성시간</div>
-                <div class="col-md-6"><%= p.created_at %></div>
+       <div class="row">
+            <div class="col-xs-6 col-md-3">문서번호 : <%= p.id %></div>
+            <div class="col-xs-6 col-md-3">작성시간 : <%= p.created_at %></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb">Plan<br><%= p.plan %></div>
+            <div class="col-xs-12 col-sm-6 col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb">FeedBack<br><%= p.feedback %></div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+            <a href="/planandfeedback/update_view/<%=@username%>/<%=@subjectid%>/<%= p.id %>">[수정]</a>
+            <a href="/planandfeedback/d/<%=@username%>/<%=@subjectid%>/<%= p.id %>">[삭제]</a>
             </div>
-            <div class="row">
-                <div class="col-md-1">작성내용</div>
-                <div class="col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb"><%= p.content %></div>
-                <div class="col-md-1">피드백</div>
-                <div class="col-md-4" style="white-space:pre-wrap; padding:10px 5px 20px 5px; outline:1px solid #bbb"><%= p.feedback %></div>
-                <div class="col-md-2">
-                <a href="/update_view/<%= p.id %>">[수정]</a><br>
-                <a href="/destroy/<%= p.id %>">[삭제]</a></div>
-            </div>
+        </div>
         <% else %>
-            <div class="row">
-                <div class="col-md-1">문서번호</div>
-                <div class="col-md-4"><%= p.id %></div>
-                <div class="col-md-1">작성시간</div>
-                <div class="col-md-6"><%= p.created_at %></div>
-            </div>
-            <div class="row">
-                <form action="/update_do/<%=@one_post.id%>" method="POST">
-                  <div class="col-md-1"></div>
-                  <div class="col-md-4">
-                        <label for="exampleInputEmail1">이번 계획</label>
-                        <textarea name="content" class="form-control" rows="10" placeholder="앞으로 주의할 사항들"><%=@one_post.content%></textarea>
-                  </div>
-                  <div class="col-md-1"></div>
-                  <div class="col-md-4">
-                        <label for="exampleInputEmail1">저번 계획에 대한 피드백</label>
-                        <textarea name="feedback" class="form-control" rows="10" placeholder="좋았던 점과 나빳던 점, 개선 가능한 부분을 생각해 작성해주세요"><%=@one_post.feedback%></textarea>
-                  </div>
-                  <div class="col-md-2">
-                      <button type="submit" class="btn btn-primary">작성완료</button>
-                  </div>
-                </form>
-            </div><!--row-->
+        <div class="row">
+            <form action="/planandfeedback/update_do/<%=@username%>/<%=@subjectid%>/<%=@one_post.id%>" method="POST">
+              <div class="col-xs-6 col-md-5">
+                    <label for="exampleInputEmail1" style="background-color: orange;">계획수정</label>
+                    <textarea name="plan" class="form-control" rows="10" placeholder="1.피드백을 참고한 다음 수행계획  2.시기, 기한을 작성하면 좋습니다. 혹은 진행중인 사항을 무작정 기록하셔도 좋습니다."><%=@one_post.plan%></textarea>
+              </div>
+              <div class="col-xs-6 col-md-5">
+                    <label for="exampleInputEmail1" style="background-color: orange;">전 계획 실행결과 피드백 수정</label>
+                    <textarea name="feedback" class="form-control" rows="10" placeholder="전 계획의 1.좋았던 점, 2.문제점 3.개선 가능한 점을 생각해 작성해주세요"><%=@one_post.feedback%></textarea>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                  <button type="submit" class="btn btn-primary" style="margin-top:25px">수정완료</button>
+              </div>
+            </form>
+        </div><!--row-->
+        
         <% end %>
     <hr>
     <% end %>
